@@ -1,6 +1,4 @@
 <?php
-require_once("includes/database.php");
-
 class User {
 	
 	private $userid;
@@ -24,13 +22,35 @@ class User {
 	}
 	
 	public function saveToDatabase(){
-		$db = Database::getInstance();
+		global $db;
+		$statement = $db->prepare("UPDATE user SET username = :username, password = :password, email = :email, bio = :bio, admin = :isAdmin WHERE user_id = :userid");
+		$statement->execute(array(
+			':username' => $this->username,
+			':password' => $this->password,
+			':email' => $this->email,
+			':bio' => $this->bio,
+			':isAdmin' => $this->isAdmin,
+			':userid' => $this->userid
+		));
 	}
 	
 	public static function getByUsername($username){
-		$db = Database::getInstance();
+		global $db;
 		$statement = $db->prepare("SELECT * FROM user WHERE username = :username");
 		$statement->execute(array(':username' => $username));
+		$row = $statement->fetch();
+		
+		if($row !== FALSE){
+			return new User($row['user_id'], $row['username'], $row['password'], $row['email'], $row['bio'], $row['admin']);
+		}
+		
+		return NULL;
+	}
+	
+	public static function getUserByID($userid){
+		global $db;
+		$statement = $db->prepare("SELECT * FROM user WHERE user_id = :id");
+		$statement->execute(array(':id' => $userid));
 		$row = $statement->fetch();
 		
 		if($row !== FALSE){
@@ -41,15 +61,27 @@ class User {
 	}
 	
 	public static function createUser($username, $password, $email){
+		global $db;
 		$user = User::getByUsername($username);
 		if($user != NULL) return FALSE;
-		$db = Database::getInstance();
 		$statement = $db->prepare("INSERT INTO user (username, password, email) VALUES (:username, :password, :email)");
 		$statement->execute(array(':username' => $username, ':password' => $password, ':email' => $email));
 		return self::getByUsername($username);
 	}
 	
 	public function getUsername(){
-		return $username;
+		return $this->username;
+	}
+	
+	public function getID(){
+		return $this->userid;
+	}
+	
+	public function getBio(){
+		return $this->bio;
+	}
+	
+	public function setBio($bio){
+		$this->bio = $bio;
 	}
 }

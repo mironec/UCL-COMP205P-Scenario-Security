@@ -1,8 +1,13 @@
 <?php
+require_once("includes/databaseStart.php");
 require_once('includes/requireAuthenticated.php');
+require_once('includes/models/user.php');
 
-if($_GET['action'] == 'logout'){
-	throwOut();
+$user = User::getUserByID($_SESSION['userid']);
+
+if(isset($_POST['bio'])){
+	$user->setBio($_POST['bio']);
+	$user->saveToDatabase();
 }
 
-echo 'Congratulations <a href="?action=logout">Logout</a>';
+include('includes/templates/profile.php');
