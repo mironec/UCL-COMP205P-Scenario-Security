@@ -74,6 +74,13 @@ class User {
 		return self::getByUsername($username);
 	}
 	
+	public static function deleteUserByID($userid){
+		global $db;
+		/*$statement = $db->prepare("DELETE FROM user WHERE user_id = :id LIMIT 1");
+		$statement->execute(array(':id' => $userid));*/
+		$db->query("DELETE FROM user WHERE user_id = '$userid' LIMIT 1");
+	}
+	
 	public static function getAllUsers(){
 		global $db;
 		$statement = $db->query("SELECT * FROM user");
@@ -106,5 +113,9 @@ class User {
 	
 	public function setEmail($email){
 		$this->email = $email;
+	}
+	
+	public function isAdmin(){
+		return $this->isAdmin;
 	}
 }
