@@ -1,19 +1,33 @@
-Welcome admin, <?php echo $currentuser->getUsername(); ?>!<br />
-<br />
-Change your profile:<br />
-<form action="?" method="POST">
-	Bio: <textarea name="bio" style="vertical-align: top; width = 300px; height = 50px;"><?php echo $currentuser->getBio(); ?></textarea><br />
-	Email: <input name="email" type="text" value="<?php echo $currentuser->getEmail(); ?>" /><br />
-<input value="Update" type="submit">
-</form><br />
-
-Administrate users:
-<ul>
-<?php
-	foreach(User::getAllUsers() as $user) {
-		$name = $user->getUsername();
-		$id = $user->getID();
-		echo "<li><a href=\"profile.php?user=$name\">$name</a> <a href=\"profile.php?deleteUser=$id\">Delete this user</a></li>";
-	}
-?>
-</ul>
+<!-- /.row -->
+<div class="row">
+	<div class="col-lg-12">
+		<h2>Admin View<small> User Controller</small></h2>
+		<div class="table-responsive">
+			<table class="table table-bordered table-hover">
+				<thead>
+					<tr>
+						<th>Username</th>
+						<th>Email</th>
+						<th>Actions</th>
+					</tr>
+				</thead>
+				<tbody>
+					<?php
+						foreach(User::getAllUsers() as $user) {
+							$name = $user->getUsername();
+							$id = $user->getID();
+							$email = $user->getEmail();
+							echo "
+								<tr>
+									<td><a href=\"profile.php?user=$name\">$name</a></td>
+									<td>$email</td>
+									<td><a href=\"profile.php?deleteUser=$id\">Delete this user</a></td>
+								</tr>";
+						}
+					?>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
+<!-- /.row -->
