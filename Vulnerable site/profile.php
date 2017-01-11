@@ -3,6 +3,8 @@ require_once("includes/databaseStart.php");
 require_once('includes/models/user.php');
 
 $user = NULL;
+require_once('includes/requireAuthenticated.php');
+
 if(isset($_GET['action']) && $_GET['action'] == 'logout'){
 	throwOut();
 }
@@ -14,7 +16,6 @@ if(isset($_GET['deleteUser']) && !empty($_GET['deleteUser'])){
 }
 
 if($user == NULL) {
-	require_once('includes/requireAuthenticated.php');
 	$currentuser = User::getUserByID($_SESSION['userid']);
 
 	if(isset($_POST['bio']) && isset($_POST['email'])){
