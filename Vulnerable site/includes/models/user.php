@@ -23,6 +23,7 @@ class User {
 	
 	public function saveToDatabase(){
 		global $db;
+		/*
 		$statement = $db->prepare("UPDATE user SET username = :username, password = :password, email = :email, bio = :bio, admin = :isAdmin WHERE user_id = :userid");
 		$statement->execute(array(
 			':username' => $this->username,
@@ -31,13 +32,15 @@ class User {
 			':bio' => $this->bio,
 			':isAdmin' => $this->isAdmin,
 			':userid' => $this->userid
-		));
+		));*/
+		$db->query("UPDATE user SET username = ".$this->username.", password = ".$this->password.", email = ".$this->email.", bio = ".$this->bio.", admin = ".$this->isAdmin." WHERE user_id = ".$this->userid);
 	}
 	
 	public static function getByUsername($username){
 		global $db;
-		$statement = $db->prepare("SELECT * FROM user WHERE username = :username");
-		$statement->execute(array(':username' => $username));
+		/*$statement = $db->prepare("SELECT * FROM user WHERE username = :username");
+		$statement->execute(array(':username' => $username));*/
+		$db->query("SELECT * FROM user WHERE username = $username");
 		$row = $statement->fetch();
 		
 		if($row !== FALSE){
@@ -49,8 +52,9 @@ class User {
 	
 	public static function getUserByID($userid){
 		global $db;
-		$statement = $db->prepare("SELECT * FROM user WHERE user_id = :id");
-		$statement->execute(array(':id' => $userid));
+		/*$statement = $db->prepare("SELECT * FROM user WHERE user_id = :id");
+		$statement->execute(array(':id' => $userid));*/
+		$db->query("SELECT * FROM user WHERE user_id = $userid");
 		$row = $statement->fetch();
 		
 		if($row !== FALSE){
@@ -64,8 +68,9 @@ class User {
 		global $db;
 		$user = User::getByUsername($username);
 		if($user != NULL) return FALSE;
-		$statement = $db->prepare("INSERT INTO user (username, password, email) VALUES (:username, :password, :email)");
-		$statement->execute(array(':username' => $username, ':password' => $password, ':email' => $email));
+		/*$statement = $db->prepare("INSERT INTO user (username, password, email) VALUES (:username, :password, :email)");
+		$statement->execute(array(':username' => $username, ':password' => $password, ':email' => $email));*/
+		$db->query("INSERT INTO user (username, password, email) VALUES ($username, $password, $email)");
 		return self::getByUsername($username);
 	}
 	
