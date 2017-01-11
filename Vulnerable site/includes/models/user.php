@@ -84,4 +84,12 @@ class User {
 	public function setBio($bio){
 		$this->bio = $bio;
 	}
+	
+	public function getEmail(){
+		return $this->email;
+	}
+	
+	public function setEmail($email){
+		$this->email = $email;
+	}
 }
