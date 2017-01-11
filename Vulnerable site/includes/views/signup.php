@@ -1,5 +1,5 @@
 <?php
-class LoginView {
+class SignupView {
 	private $controller;
 	
 	public function __construct($controller){
@@ -7,6 +7,6 @@ class LoginView {
 	}
 	
 	public function output(){
-		include('includes/templates/login.php');
+		include('includes/templates/signup.php');
 	}
 }
