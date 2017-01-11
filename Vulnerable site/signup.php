@@ -10,7 +10,7 @@ if(isset($_GET['username']) && !empty($_GET['username']) && isset($_GET['passwor
 	$user = User::createUser($name, $pass, $mail);
 	if($user != FALSE){
 		session_start();
-		$_SESSION['username'] = $name;
+		$_SESSION['userid'] = $user->getID();
 		header("Location: profile.php");
 		die();
 	}
