@@ -15,4 +15,7 @@ if(isset($_POST['bio']) && isset($_POST['email'])){
 	$user->saveToDatabase();
 }
 
-include('includes/templates/profile.php');
+if($user == NULL)
+	include('includes/templates/profile.php');
+else
+	include('includes/templates/otherProfile.php');

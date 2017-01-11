@@ -1,4 +1,3 @@
-<?php if($user == NULL){ ?>
 Welcome, <?php echo $currentuser->getUsername(); ?>!<br />
 <br />
 Change your profile:<br />
@@ -7,9 +6,3 @@ Change your profile:<br />
   Email: <input name="email" type="text" value="<?php echo $currentuser->getEmail(); ?>" /><br />
   <input value="Update" type="submit">
  </form>
-<?php } else { ?>
-Welcome to the profile for <?php echo $user->getUsername(); ?>!<br />
-<br />
-Email: <?php echo $user->getEmail(); ?><br />
-Bio: <?php echo $user->getBio(); ?>
-<?php } ?>
