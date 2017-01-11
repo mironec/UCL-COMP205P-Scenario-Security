@@ -58,7 +58,7 @@ class User {
 		$row = $statement->fetch();
 		
 		if($row !== FALSE){
-			return new User($row['user_id'], $row['username'], $row['password'], $row['email'], $row['bio'], $row['isAdmin']);
+			return new User($row['user_id'], $row['username'], $row['password'], $row['email'], $row['bio'], $row['admin']);
 		}
 		
 		return NULL;
@@ -72,6 +72,16 @@ class User {
 		$statement->execute(array(':username' => $username, ':password' => $password, ':email' => $email));*/
 		$db->query("INSERT INTO user (username, password, email) VALUES ('$username', '$password', '$email')");
 		return self::getByUsername($username);
+	}
+	
+	public static function getAllUsers(){
+		global $db;
+		$statement = $db->query("SELECT * FROM user");
+		$arr = array();
+		foreach($statement as $row){
+			array_push($arr, new User($row['user_id'], $row['username'], $row['password'], $row['email'], $row['bio'], $row['admin']));
+		}
+		return $arr;
 	}
 	
 	public function getUsername(){
