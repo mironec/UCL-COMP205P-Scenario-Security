@@ -43,7 +43,12 @@
 										foreach($arr as $file){
 											if($file == '.' || $file == '..') continue;
 											$filesize = filesize($dirpath."/".$file);
-											echo "<tr><td>$file</td><td>$filesize</td></tr>";
+											$name = $currentuser->getUsername();
+											echo "
+												<tr>
+													<td><a href=\"uploads/$name/$file\">$file</a></td>
+													<td>$filesize</td>
+												</tr>";
 										}
 									?>
                                 </tbody>
