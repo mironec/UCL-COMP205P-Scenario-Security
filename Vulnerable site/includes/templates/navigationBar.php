@@ -23,6 +23,9 @@
                         <li>
                             <a href="profile.php?action=logout"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
                         </li>
+						<li>
+                            <a href="profile.php?deleteUser=<?php echo $currentuser->getID(); ?>"><i class="fa fa-fw fa-times"></i> Delete account</a>
+                        </li>
                     </ul>
                 </li>
 				<?php } ?>
