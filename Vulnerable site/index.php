@@ -6,8 +6,8 @@ if(isset($_GET['username']) && !empty($_GET['username']) && isset($_GET['passwor
 	$name = $_GET['username'];
 	$pass = $_GET['password'];
 	
-	$user = User::getByUsername($name);
-	if($user != NULL && $user->checkPassword($pass)){
+	$user = User::authenticateUser($name, $pass);
+	if($user != NULL){
 		session_start();
 		$_SESSION['userid'] = $user->getID();
 		header("Location: profile.php");

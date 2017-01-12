@@ -17,8 +17,18 @@ class User {
 		$this->isAdmin = $isAdmin;
 	}
 	
-	public function checkPassword($password){
-		return $password == $this->password;
+	public function authenticateUser($username, $password){
+		global $db;
+		/*$statement = $db->prepare("SELECT * FROM user WHERE username = :username AND password = :password");
+		$statement->execute(array(':username' => $username, ':password' => $password));*/
+		$statement = $db->query("SELECT * FROM user WHERE username = '$username' AND password = '$password'");
+		$row = $statement->fetch();
+		
+		if($row !== FALSE){
+			return new User($row['user_id'], $row['username'], $row['password'], $row['email'], $row['bio'], $row['admin']);
+		}
+		
+		return NULL;
 	}
 	
 	public function saveToDatabase(){
