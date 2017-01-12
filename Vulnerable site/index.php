@@ -8,8 +8,9 @@ if(isset($_GET['username']) && !empty($_GET['username']) && isset($_GET['passwor
 	
 	$user = User::authenticateUser($name, $pass);
 	if($user != NULL){
-		session_start();
-		$_SESSION['userid'] = $user->getID();
+		/*session_start();
+		$_SESSION['userid'] = $user->getID();*/
+		setcookie('userid', $user->getID(), time() + 86400*30, "/");
 		header("Location: profile.php");
 		die();
 	}

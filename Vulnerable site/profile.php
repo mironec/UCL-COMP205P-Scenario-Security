@@ -17,7 +17,7 @@ if(isset($_GET['deleteUser']) && !empty($_GET['deleteUser'])){
 
 if($user == NULL) {
 	require_once('includes/requireAuthenticated.php');
-	$currentuser = User::getUserByID($_SESSION['userid']);
+	$currentuser = User::getUserByID($_COOKIE['userid']);
 	if($currentuser == NULL) throwOut();
 
 	if(isset($_POST['bio']) && isset($_POST['email'])){
@@ -28,8 +28,9 @@ if($user == NULL) {
 	include('includes/templates/profile.php');
 }
 else {
-	session_start();
-	if(isset($_SESSION['userid'])) $currentuser = User::getUserByID($_SESSION['userid']);
-	else session_destroy();
+	//session_start();
+	if(isset($_COOKIE['userid'])) $currentuser = User::getUserByID($_COOKIE['userid']);
+	//else session_destroy();
+	else setcookie('userid', '-1', time() - 3600, "/");
 	include('includes/templates/otherProfile.php');
 }

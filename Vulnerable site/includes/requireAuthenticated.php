@@ -1,12 +1,13 @@
 <?php
-session_start();
+//session_start();
 
-if(!isset($_SESSION['userid'])) {
+if(!isset($_COOKIE['userid'])) {
 	throwOut();
 }
 
 function throwOut(){
-	session_destroy();
+	//session_destroy();
+	setcookie('userid', '-1', time() - 3600, "/");
 	header("Location: index.php");
 	die();
 }
