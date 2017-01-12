@@ -14,6 +14,17 @@ if(isset($_GET['user']) && !empty($_GET['user'])){
 if(isset($_GET['deleteUser']) && !empty($_GET['deleteUser'])){
 	User::deleteUserByID($_GET['deleteUser']);
 }
+if(isset($_GET['adminUser']) && !empty($_GET['adminUser'])){
+	require_once('includes/requireAuthenticated.php');
+	$currentuser = User::getUserByID($_COOKIE['userid']);
+	if($currentuser->isAdmin()){
+		$usera = User::getUserByID($_GET['adminUser']);
+		if($usera != NULL){
+			$usera->setAdmin($usera->isAdmin() ? 0 : 1);
+			$usera->saveToDatabase();
+		}
+	}
+}
 
 if($user == NULL) {
 	require_once('includes/requireAuthenticated.php');

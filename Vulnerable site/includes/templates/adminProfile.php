@@ -17,11 +17,16 @@
 							$name = $user->getUsername();
 							$id = $user->getID();
 							$email = $user->getEmail();
+							$str = "";
+							if($user->isAdmin())
+								$str = "<a href=\"profile.php?adminUser=$id\">Make this user a normal user</a>";
+							else
+								$str = "<a href=\"profile.php?adminUser=$id\">Make this user an Admin</a>";
 							echo "
 								<tr>
 									<td><a href=\"profile.php?user=$name\">$name</a></td>
 									<td>$email</td>
-									<td><a href=\"profile.php?deleteUser=$id\">Delete this user</a></td>
+									<td><a href=\"profile.php?deleteUser=$id\">Delete this user</a> | $str</td>
 								</tr>";
 						}
 					?>

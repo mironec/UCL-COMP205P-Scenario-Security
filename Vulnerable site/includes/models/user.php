@@ -128,4 +128,8 @@ class User {
 	public function isAdmin(){
 		return $this->isAdmin;
 	}
+	
+	public function setAdmin($b){
+		$this->isAdmin = $b;
+	}
 }
