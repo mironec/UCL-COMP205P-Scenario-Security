@@ -1,4 +1,4 @@
-<?php include('includes/templates/htmlHeader.php'); ?>
+<?php require_once('includes/utilities.php'); include('includes/templates/htmlHeader.php'); ?>
 	<div id="wrapper">
 
         <?php include('includes/templates/navigationBar.php'); ?>
@@ -45,7 +45,9 @@
 											$filesize = filesize($dirpath."/".$file);
 											echo "
 												<tr>
-													<td><a href=\"download.php?file=$file\">$file</a></td>
+													<td><a href=\"download.php?file=$file\">";
+											echos($file);
+											echo "</a></td>
 													<td>$filesize</td>
 												</tr>";
 										}

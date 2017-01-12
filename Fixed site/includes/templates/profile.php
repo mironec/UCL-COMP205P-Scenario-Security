@@ -1,4 +1,4 @@
-<?php include('includes/templates/htmlHeader.php'); ?>
+<?php require_once('includes/utilities.php'); include('includes/templates/htmlHeader.php'); ?>
     <div id="wrapper">
 
         <?php include('includes/templates/navigationBar.php'); ?>
@@ -28,15 +28,15 @@
 				<form action="?" method="POST">
 					<div class="form-group">
 						<label>Username</label>
-						<p class="form-control-static"><?php echo $currentuser->getUsername(); ?></p>
+						<p class="form-control-static"><?php echos($currentuser->getUsername()); ?></p>
 					</div>
 					<div class="form-group">
 						<label>Email</label>
-						<input class="form-control" name="email" type="text" value="<?php echo $currentuser->getEmail(); ?>" /><br />
+						<input class="form-control" name="email" type="text" value="<?php echos($currentuser->getEmail()); ?>" /><br />
 					</div>
 					<div class="form-group">
 						<label>Bio</label>
-						<textarea name="bio" class="form-control" rows="3"><?php echo $currentuser->getBio(); ?></textarea>
+						<textarea name="bio" class="form-control" rows="3"><?php echos($currentuser->getBio()); ?></textarea>
 					</div>
 
 					<div class="text-center">

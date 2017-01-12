@@ -19,12 +19,10 @@ class User {
 	
 	public function authenticateUser($username, $password){
 		global $db;
-		$statement = $db->prepare("SELECT * FROM user WHERE username = :username AND password = :password");
-		$statement->execute(array(':username' => $username, ':password' => $password));
-		$row = $statement->fetch();
-		
-		if($row !== FALSE){
-			return new User($row['user_id'], $row['username'], $row['password'], $row['email'], $row['bio'], $row['admin']);
+		$user = self::getByUsername($username);
+		if($user == NULL) return NULL;
+		if(password_verify($password, $user->getPassword())){
+			return $user;
 		}
 		
 		return NULL;
@@ -73,6 +71,7 @@ class User {
 		global $db;
 		$user = User::getByUsername($username);
 		if($user != NULL) return FALSE;
+		$password = password_hash($password, PASSWORD_DEFAULT);
 		$statement = $db->prepare("INSERT INTO user (username, password, email) VALUES (:username, :password, :email)");
 		$statement->execute(array(':username' => $username, ':password' => $password, ':email' => $email));
 		return self::getByUsername($username);
@@ -124,5 +123,9 @@ class User {
 	
 	public function setAdmin($b){
 		$this->isAdmin = $b;
+	}
+	
+	public function getPassword(){
+		return $this->password;
 	}
 }

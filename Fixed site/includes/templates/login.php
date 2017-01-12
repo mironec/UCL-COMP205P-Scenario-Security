@@ -101,9 +101,12 @@
                 <p class="lead">Login to see your information</p>
 				<p>Current users:<br />
 					<?php 
+						require_once('includes/utilities.php');
 						foreach(User::getAllUsers() as $user) {
 							$name = $user->getUsername();
-							echo "<a href=\"profile.php?user=$name\">$name</a><br />";
+							echo "<a href=\"profile.php?user=$name\">";
+							echos($name);
+							echo "</a><br />";
 						}
 					?>
 				</p>

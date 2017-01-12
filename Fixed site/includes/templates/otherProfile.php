@@ -1,4 +1,4 @@
-<?php include('includes/templates/htmlHeader.php'); ?>
+<?php require_once('includes/utilities.php'); include('includes/templates/htmlHeader.php'); ?>
     <div id="wrapper">
 
         <?php include('includes/templates/navigationBar.php'); ?>
@@ -27,15 +27,15 @@
 
 				<div class="form-group">
 					<label>Username</label>
-					<p class="form-control-static"><?php echo $user->getUsername(); ?></p>
+					<p class="form-control-static"><?php echos($user->getUsername()); ?></p>
 				</div>
 				<div class="form-group">
 					<label>Email</label>
-					<p class="form-control-static"><?php echo $user->getEmail(); ?></p>
+					<p class="form-control-static"><?php echos($user->getEmail()); ?></p>
 				</div>
 				<div class="form-group">
 					<label>Bio</label>
-					<p class="form-control-static"><?php echo $user->getBio(); ?></p>
+					<p class="form-control-static"><?php echos($user->getBio()); ?></p>
 				</div>
 				
             </div>

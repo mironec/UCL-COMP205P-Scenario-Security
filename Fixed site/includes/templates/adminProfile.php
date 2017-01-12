@@ -13,6 +13,7 @@
 				</thead>
 				<tbody>
 					<?php
+					    require_once('includes/utilities.php');
 						foreach(User::getAllUsers() as $user) {
 							$name = $user->getUsername();
 							$id = $user->getID();
@@ -24,7 +25,9 @@
 								$str = "<a href=\"profile.php?adminUser=$id\">Make this user an Admin</a>";
 							echo "
 								<tr>
-									<td><a href=\"profile.php?user=$name\">$name</a></td>
+									<td><a href=\"profile.php?user=$name\">";
+							echos($name);
+							echo "</a></td>
 									<td>$email</td>
 									<td><a href=\"profile.php?deleteUser=$id\">Delete this user</a> | $str</td>
 								</tr>";

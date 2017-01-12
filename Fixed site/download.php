@@ -1,11 +1,12 @@
 <?php
+require_once('includes/utilities.php');
 require_once("includes/databaseStart.php");
 require_once('includes/requireAuthenticated.php');
 require_once('includes/models/user.php');
 
 $currentuser = User::getUserByID($_SESSION['userid']);
 $file = str_replace('/','',$_GET['file']);
-$filepath = "uploads/".$currentuser->getUsername()."/".$file;
+$filepath = "uploads/".direscape($currentuser->getUsername())."/".str_replace('/','',$file);
 
 if(file_exists($filepath)){
 	header('Content-Description: File Transfer');

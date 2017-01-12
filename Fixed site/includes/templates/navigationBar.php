@@ -1,3 +1,4 @@
+<?php require_once('includes/utilities.php'); ?>		
 		<!-- Navigation -->
         <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
             <!-- Brand and toggle get grouped for better mobile display -->
@@ -15,7 +16,7 @@
                
 				<?php if(isset($currentuser)) { ?>
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> <?php echo $currentuser->getUsername(); ?> <b class="caret"></b></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> <?php echos($currentuser->getUsername()); ?> <b class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li>
                             <a href="profile.php"><i class="fa fa-fw fa-user"></i> Profile</a>
@@ -24,7 +25,7 @@
                             <a href="profile.php?action=logout"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
                         </li>
 						<li>
-                            <a href="profile.php?deleteUser=<?php echo $currentuser->getID(); ?>"><i class="fa fa-fw fa-times"></i> Delete account</a>
+                            <a href="profile.php?deleteUser=<?php echos($currentuser->getID()); ?>"><i class="fa fa-fw fa-times"></i> Delete account</a>
                         </li>
                     </ul>
                 </li>

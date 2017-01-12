@@ -1,11 +1,13 @@
 <?php
+require_once('includes/utilities.php');
 require_once("includes/databaseStart.php");
 require_once('includes/requireAuthenticated.php');
 require_once('includes/models/user.php');
 
 $currentuser = User::getUserByID($_SESSION['userid']);
-$dirpath = "uploads/".$currentuser->getUsername()."/";
+$dirpath = "uploads/".direscape($currentuser->getUsername())."/";
 if(!file_exists($dirpath)){
+	echo $dirpath;
 	mkdir($dirpath);
 }
 
