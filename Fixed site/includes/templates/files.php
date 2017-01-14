@@ -43,9 +43,10 @@
 										foreach($arr as $file){
 											if($file == '.' || $file == '..') continue;
 											$filesize = filesize($dirpath."/".$file);
+											$token = session_id();
 											echo "
 												<tr>
-													<td><a href=\"download.php?file=$file\">";
+													<td><a href=\"download.php?file=$file&token=$token\">";
 											echos($file);
 											echo "</a></td>
 													<td>$filesize</td>

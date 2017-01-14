@@ -18,18 +18,19 @@
 							$name = $user->getUsername();
 							$id = $user->getID();
 							$email = $user->getEmail();
+							$token = session_id();
 							$str = "";
 							if($user->isAdmin())
-								$str = "<a href=\"profile.php?adminUser=$id\">Make this user a normal user</a>";
+								$str = "<a href=\"profile.php?adminUser=$id&token=$token\">Make this user a normal user</a>";
 							else
-								$str = "<a href=\"profile.php?adminUser=$id\">Make this user an Admin</a>";
+								$str = "<a href=\"profile.php?adminUser=$id&token=$token\">Make this user an Admin</a>";
 							echo "
 								<tr>
 									<td><a href=\"profile.php?user=$name\">";
 							echos($name);
 							echo "</a></td>
 									<td>$email</td>
-									<td><a href=\"profile.php?deleteUser=$id\">Delete this user</a> | $str</td>
+									<td><a href=\"profile.php?deleteUser=$id&token=$token\">Delete this user</a> | $str</td>
 								</tr>";
 						}
 					?>

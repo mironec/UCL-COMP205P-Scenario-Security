@@ -22,10 +22,10 @@
                             <a href="profile.php"><i class="fa fa-fw fa-user"></i> Profile</a>
                         </li>
                         <li>
-                            <a href="profile.php?action=logout"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
+                            <a href="profile.php?action=logout&token=<?php echo session_id(); ?>"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
                         </li>
 						<li>
-                            <a href="profile.php?deleteUser=<?php echos($currentuser->getID()); ?>"><i class="fa fa-fw fa-times"></i> Delete account</a>
+                            <a href="profile.php?deleteUser=<?php echos($currentuser->getID()); ?>&token=<?php echo session_id(); ?>"><i class="fa fa-fw fa-times"></i> Delete account</a>
                         </li>
                     </ul>
                 </li>

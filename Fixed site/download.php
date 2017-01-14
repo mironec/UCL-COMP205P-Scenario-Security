@@ -2,6 +2,7 @@
 require_once('includes/utilities.php');
 require_once("includes/databaseStart.php");
 require_once('includes/requireAuthenticated.php');
+require_once('includes/requireToken.php');
 require_once('includes/models/user.php');
 
 $currentuser = User::getUserByID($_SESSION['userid']);
